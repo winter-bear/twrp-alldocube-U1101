@@ -14,7 +14,7 @@ on:
       DEVICE_TREE_URL:
         description: 'DEVICE_TREE_URL'
         required: true
-        default: 'https://github.com/winter-bear/custom_recovery_tree_alldocube_U1101'
+        default: 'https://github.com/winter-bear/twrp_alldocube_U1101'
       DEVICE_TREE_BRANCH:
         description: 'DEVICE_TREE_BRANCH'
         required: true
