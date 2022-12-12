@@ -37,39 +37,44 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
 
-# A/B Post-install Config - Vendor
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_vendor=true \
-    POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
-    FILESYSTEM_TYPE_vendor=ext4 \
-    POSTINSTALL_OPTIONAL_vendor=true
-    
-# Health Hal
+# Virtual A/B
+ENABLE_VIRTUAL_AB := true
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+
+# Dynamic Partitions
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
+# VNDK
+PRODUCT_TARGET_VNDK_VERSION := 30
+
+# API
+PRODUCT_SHIPPING_API_LEVEL := 30
+
+# Health HAL
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl \
-    android.hardware.health@2.1-service
+    android.hardware.health@2.1-service \
+    libhealthd.$(PRODUCT_PLATFORM)
 
 # Boot Control HAL
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.2-impl \
-    android.hardware.boot@1.2-impl.recovery \
-    android.hardware.boot@1.2-service
-
-PRODUCT_PACKAGES += \
-    android.hardware.boot@1.2-mtkimpl.recovery \
-    libmtk_bsg.recovery
+    android.hardware.boot@1.1-mtkimpl.recovery \
+    android.hardware.boot@1.1-mtkimpl
 
 PRODUCT_PACKAGES_DEBUG += \
-    bootctl
-
-# MTK Preloader Utils
-PRODUCT_PACKAGES += \
-    mtk_plpath_utils.recovery
+    bootctrl
 
 # Fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
     fastbootd
+
+# MTK Plpath Utils
+PRODUCT_PACKAGES += \
+    mtk_plpath_utils.recovery
+
+PRODUCT_PACKAGES_DEBUG += \
+    update_engine_client
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
@@ -78,25 +83,11 @@ PRODUCT_PACKAGES += \
     update_verifier \
     update_engine_sideload
 
-# f2fs utilities
-PRODUCT_PACKAGES += \
-    sg_write_buffer \
-    f2fs_io \
-    check_f2fs
 
-# Userdata checkpoint
-PRODUCT_PACKAGES += \
-    checkpoint_gc
-
-# Blacklist
-PRODUCT_SYSTEM_PROPERTY_BLACKLIST += \
-    ro.bootimage.build.date.utc \
-    ro.build.date.utc
 
 # OEM otacerts
 PRODUCT_EXTRA_RECOVERY_KEYS += \
     $(LOCAL_PATH)/security/releasekey
 
-# Soong namespaces
-PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)
+
+
