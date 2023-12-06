@@ -186,9 +186,9 @@ TW_NO_FASTBOOT_BOOT := true
 TW_INCLUDE_FASTBOOTD := true
 
 # Version/Maintainer
-TW_DEVICE_VERSION :=  FOR XPad by winbear $(shell date '+%Y%m%d')
+TW_DEVICE_VERSION :=  by winbear $(shell date '+%Y%m%d')
 
 # swap x anf y axis for touch
 #RECOVERY_TOUCHSCREEN_SWAP_XY := true
-RECOVERY_TOUCHSCREEN_FLIP_X := true
-RECOVERY_TOUCHSCREEN_FLIP_Y := true
+#RECOVERY_TOUCHSCREEN_FLIP_X := true
+#RECOVERY_TOUCHSCREEN_FLIP_Y := true
