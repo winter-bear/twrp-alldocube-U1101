@@ -18,7 +18,7 @@ on:
       DEVICE_TREE_BRANCH:
         description: 'DEVICE_TREE_BRANCH'
         required: true
-        default: 'Android-12-test1'
+        default: 'Android-13'
       DEVICE_PATH:
         description: 'DEVICE_PATH'
         required: true
@@ -134,7 +134,7 @@ jobs:
     - name: Renaming into TWRP
       run: |
         cd out/target/product/${{ github.event.inputs.DEVICE_NAME }}
-        mv ${{ github.event.inputs.BUILD_TARGET }}.img twrp-3.7.0_12.1-${{ github.event.inputs.DEVICE_NAME }}-${{ steps.props.outputs.date }}.img
+        mv ${{ github.event.inputs.BUILD_TARGET }}.img twrp-3.7.0-${{ github.event.inputs.DEVICE_NAME }}-${{ steps.props.outputs.date }}.img
       working-directory: ${{ steps.pwd.outputs.workdir }}
 
     - name: Upload to Release
