@@ -38,7 +38,7 @@ on:
         type: choice
         options:
         - boot
-        - vendor_boot
+        - vendorboot
 
 jobs:
   build:
